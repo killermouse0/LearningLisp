@@ -1,0 +1,20 @@
+#!/bin/sh
+#|-*- mode:lisp -*-|#
+#|
+exec ros -Q -- $0 "$@"
+|#
+(progn ;;init forms
+      (ros:ensure-asdf)
+      #+quicklisp(ql:quickload '() :silent t))
+
+(defpackage :ros.script.mandelbrot.3887511815
+  (:use :cl))
+(in-package :ros.script.mandelbrot.3887511815)
+
+(load "mandelbrot.lisp")
+      
+(defun main (&rest argv)
+  (declare (ignorable argv))
+  (save_to_file "mandelbrot.png")
+  (format t "We're done!~%"))
+
