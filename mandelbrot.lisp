@@ -32,13 +32,12 @@
          (z (* (- M mm)
                (- 1
                   (abs (- (mod (/ H 60) 2) 1))))))
-    (cond
-     ((< H 60) (values M (+ z mm) mm))
-     ((< H 120) (values (+ z mm) M mm))
-     ((< H 180) (values mm M (+ z mm)))
-     ((< H 240) (values mm (+ z mm) M))
-     ((< H 300) (values (+ z mm) m M))
-     (t (values M mm (+ z mm))))))
+    (cond ((< H 60) (values M (+ z mm) mm))
+          ((< H 120) (values (+ z mm) M mm))
+          ((< H 180) (values mm M (+ z mm)))
+          ((< H 240) (values mm (+ z mm) M))
+          ((< H 300) (values (+ z mm) m M))
+          (t (values M mm (+ z mm))))))
 
 (defun escape-to-color (n)
   (declare (type integer n))
@@ -65,10 +64,9 @@
 (defun mandelbrot (z_n c n n-max)
   (declare (type complex z_n c))
   (declare (type integer n n-max))
-  (cond
-   ((= n n-max) n)
-   ((> (abs z_n) *mandelbrot-escape-threshold*) n)
-   (t (mandelbrot (+ (* z_n z_n) c) c (+ n 1) n-max))))
+  (cond ((= n n-max) n)
+        ((> (abs z_n) *mandelbrot-escape-threshold*) n)
+        (t (mandelbrot (+ (* z_n z_n) c) c (+ n 1) n-max))))
 
 ;; image computation
 (defun compute-image-sector (row-min col-min row-max col-max image)
