@@ -1,0 +1,16 @@
+(defparameter *data-file* "AoC/Day1/aoc_1.txt")
+
+(defun process (stream acc all)
+  (let* ((str-val (read-line stream nil :eof))
+         (val (read-from-string (if (eq str-val :eof) "" str-val) nil :eol)))
+    (cond ((equal str-val :eof) (cons acc all))
+          ((numberp val) (process stream (+ val acc) all))
+          ((eq val :eol) (process stream 0 (cons acc all))))))
+
+(let* ((in (open *data-file*))
+       (inventory (process in 0 '()))
+       (sorted (sort inventory #'>)))
+    (print (+ (nth 0 sorted)
+              (nth 1 sorted)
+              (nth 2 sorted)))
+  (close in))
